@@ -1,0 +1,15 @@
+web:
+  image: 'gitlab/gitlab-ee:latest'
+  restart: always
+  hostname: 'viettelcloud.gitlab.com'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'http://gitlab.cloud.viettel.com:80'
+      gitlab_rails['gitlab_shell_ssh_port'] = 2224
+  ports:
+    - '80:80'
+    - '2224:22'
+  volumes:
+    - '$GITLAB_HOME/config:/etc/gitlab'
+    - '$GITLAB_HOME/logs:/var/log/gitlab'
+    - '$GITLAB_HOME/data:/var/opt/gitlab'
